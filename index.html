@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoWorking Space — Everyone Included</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #454F54;
+    --mauve: #D4C8D0;
+    --blue: #6B7BE8;
+    --mint-light: #A8E8D8;
+    --mint: #00EDB0;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--mauve);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 22px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(212, 200, 208, 0.72);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(69, 79, 84, 0.08);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 38px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+    color: var(--blue);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 130px 48px 80px;
+    overflow: hidden;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .blob1 {
+    width: 520px;
+    height: 520px;
+    background: var(--mint);
+    top: -120px;
+    right: -80px;
+    animation: floatBlob1 9s ease-in-out infinite;
+  }
+
+  .blob2 {
+    width: 380px;
+    height: 380px;
+    background: var(--blue);
+    bottom: 40px;
+    left: -100px;
+    animation: floatBlob2 11s ease-in-out infinite;
+  }
+
+  .blob3 {
+    width: 260px;
+    height: 260px;
+    background: var(--mint-light);
+    top: 50%;
+    left: 40%;
+    animation: floatBlob3 13s ease-in-out infinite;
+  }
+
+  @keyframes floatBlob1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.08); }
+  }
+
+  @keyframes floatBlob2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -40px) scale(0.94); }
+  }
+
+  @keyframes floatBlob3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(20px, -20px) scale(1.05); }
+    66% { transform: translate(-15px, 25px) scale(0.97); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    line-height: 1.02;
+    color: var(--dark);
+    max-width: 820px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s ease forwards;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-title .accent {
+    color: var(--mint);
+    -webkit-text-stroke: 0px;
+  }
+
+  .hero-sub {
+    margin-top: 32px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--dark);
+    opacity: 0;
+    max-width: 460px;
+    font-weight: 300;
+    animation: fadeUp 0.9s 0.65s ease forwards;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.85s ease forwards;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-primary {
+    background: var(--dark);
+    color: var(--mint);
+    padding: 16px 38px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: transform 0.25s, background 0.25s;
+  }
+
+  .btn-primary:hover {
+    background: var(--blue);
+    transform: translateY(-3px);
+    color: var(--white);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dark);
+    padding: 16px 38px;
+    border-radius: 60px;
+    border: 1.5px solid var(--dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: transform 0.25s, border-color 0.25s, color 0.25s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-3px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s ease forwards;
+    z-index: 2;
+  }
+
+  .scroll-hint span {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .scroll-line {
+    width: 48px;
+    height: 1px;
+    background: var(--dark);
+    opacity: 0.4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--blue);
+    animation: scrollLine 2s 1.6s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .marquee-strip {
+    background: var(--dark);
+    padding: 18px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: marquee 18s linear infinite;
+  }
+
+  .marquee-inner span {
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    padding: 0 40px;
+    font-weight: 500;
+  }
+
+  .marquee-inner .dot {
+    color: var(--blue);
+    padding: 0;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .about {
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .about-left {
+    position: sticky;
+    top: 120px;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    color: var(--dark);
+  }
+
+  .about-title em {
+    font-style: italic;
+    color: var(--mint);
+  }
+
+  .about-desc {
+    margin-top: 28px;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--dark);
+    opacity: 0.75;
+    font-weight: 300;
+    max-width: 400px;
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 16px;
+  }
+
+  .ideal-card {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(69, 79, 84, 0.08);
+    border-radius: 20px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+
+  .ideal-card:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 12px 40px rgba(107, 123, 232, 0.12);
+  }
+
+  .ideal-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .icon-mint { background: var(--mint); }
+  .icon-blue { background: var(--blue); }
+  .icon-mint-light { background: var(--mint-light); }
+  .icon-dark { background: var(--dark); }
+
+  .ideal-text h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .ideal-text p {
+    font-size: 0.88rem;
+    color: var(--dark);
+    opacity: 0.65;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .spaces {
+    background: var(--dark);
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spaces::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: var(--mint);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.08;
+  }
+
+  .spaces-header {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .spaces-header .section-label { color: var(--mint); }
+
+  .spaces-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--mauve);
+    line-height: 1.1;
+  }
+
+  .spaces-title em { font-style: italic; color: var(--mint); }
+
+  .spaces-note {
+    font-size: 0.85rem;
+    color: var(--mauve);
+    opacity: 0.4;
+    max-width: 260px;
+    text-align: right;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .floors-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .floor-card {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 200, 208, 0.12);
+    background: rgba(212, 200, 208, 0.05);
+    transition: transform 0.3s;
+  }
+
+  .floor-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .floor-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(212, 200, 208, 0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(212, 200, 208, 0.08);
+  }
+
+  .floor-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .floor-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 14px;
+  }
+
+  .floor-placeholder svg {
+    opacity: 0.2;
+  }
+
+  .floor-placeholder span {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    opacity: 0.3;
+  }
+
+  .floor-info {
+    padding: 28px 30px;
+  }
+
+  .floor-num {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .floor-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--mauve);
+  }
+
+  .floor-desc {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--mauve);
+    opacity: 0.45;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .vibe-section {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .vibe-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .vibe-tile {
+    border-radius: 20px;
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 220px;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .vibe-tile:hover { transform: scale(1.02); }
+
+  .vibe-tile.t1 { background: var(--mint); grid-row: span 1; }
+  .vibe-tile.t2 { background: var(--blue); }
+  .vibe-tile.t3 { background: var(--mint-light); grid-column: span 2; }
+  .vibe-tile.t4 { background: var(--dark); }
+
+  .vibe-tile .big-num {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    opacity: 0.1;
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .vibe-tile h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--dark);
+    position: relative;
+    z-index: 2;
+  }
+
+  .vibe-tile.t2 h3, .vibe-tile.t4 h3 { color: var(--white); }
+
+  .vibe-tile p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    opacity: 0.7;
+    color: var(--dark);
+    position: relative;
+    z-index: 2;
+    font-weight: 300;
+  }
+
+  .vibe-tile.t2 p, .vibe-tile.t4 p { color: var(--white); }
+
+  .contact-section {
+    background: var(--blue);
+    padding: 100px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::after {
+    content: 'eco';
+    position: absolute;
+    bottom: -40px;
+    right: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem;
+    color: rgba(255,255,255,0.05);
+    font-weight: 700;
+    pointer-events: none;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-left .section-label { color: var(--mint); }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  .contact-title em { font-style: italic; color: var(--mint); }
+
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-input {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    padding: 18px 22px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+    width: 100%;
+  }
+
+  .contact-input::placeholder { color: rgba(255,255,255,0.4); }
+  .contact-input:focus { border-color: var(--mint); background: rgba(255,255,255,0.18); }
+
+  .contact-input.textarea { resize: none; height: 120px; }
+
+  .contact-btn {
+    background: var(--mint);
+    color: var(--dark);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 60px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-start;
+    letter-spacing: 0.02em;
+    transition: transform 0.25s, background 0.25s;
+  }
+
+  .contact-btn:hover { transform: translateY(-3px); background: var(--mint-light); }
+
+  footer {
+    background: var(--dark);
+    padding: 60px 48px 40px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(212, 200, 208, 0.1);
+    padding-top: 40px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-logo img { width: 36px; height: 36px; }
+
+  .footer-logo span {
+    font-family: 'Playfair Display', serif;
+    color: var(--mauve);
+    font-size: 1.1rem;
+  }
+
+  .footer-slogan {
+    font-size: 0.78rem;
+    color: var(--mauve);
+    opacity: 0.35;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-right p {
+    font-size: 0.78rem;
+    color: var(--mauve);
+    opacity: 0.3;
+    line-height: 1.7;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .about-left { position: static; }
+    .spaces { padding: 80px 24px; }
+    .spaces-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .spaces-note { text-align: left; }
+    .floors-grid { grid-template-columns: 1fr; }
+    .vibe-section { padding: 80px 24px; }
+    .vibe-grid { grid-template-columns: 1fr; }
+    .vibe-tile.t3 { grid-column: span 1; }
+    .contact-inner { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .contact-section { padding: 80px 24px; }
+    footer { padding: 40px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-right { text-align: left; }
+    .scroll-hint { left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="logo.png" alt="EcoWorking logo" onerror="this.style.display='none'">
+    <span>EcoWorking</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#spaces">Spaces</a></li>
+    <li><a href="#vibe">Our Vibe</a></li>
+    <li><a href="#contact">Visit Us</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+  <p class="hero-eyebrow">Coworking · Community · Nature</p>
+  <h1 class="hero-title">
+    A place where <em>everyone</em><br>is <span class="accent">included.</span>
+  </h1>
+  <p class="hero-sub">
+    Work, rest, breathe. Surrounded by plants, good people, and calm energy. This space is for all of you.
+  </p>
+  <div class="hero-cta">
+    <a href="#spaces" class="btn-primary">See our space</a>
+    <a href="#contact" class="btn-secondary">Come visit</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Plant Friendly</span><span class="dot">·</span>
+    <span>Everyone Welcome</span><span class="dot">·</span>
+    <span>Rest or Work</span><span class="dot">·</span>
+    <span>Good Vibes Only</span><span class="dot">·</span>
+    <span>Animal Friendly</span><span class="dot">·</span>
+    <span>No One Left Out</span><span class="dot">·</span>
+    <span>Plant Friendly</span><span class="dot">·</span>
+    <span>Everyone Welcome</span><span class="dot">·</span>
+    <span>Rest or Work</span><span class="dot">·</span>
+    <span>Good Vibes Only</span><span class="dot">·</span>
+    <span>Animal Friendly</span><span class="dot">·</span>
+    <span>No One Left Out</span><span class="dot">·</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <p class="section-label">Our Ideals</p>
+    <h2 class="about-title">Built around <em>life,</em><br>not just work.</h2>
+    <p class="about-desc">
+      EcoWorking was made with a simple belief: a space should welcome everyone — humans, animals, plants, dreams. Whether you need focus or rest, we have a corner for you.
+    </p>
+  </div>
+  <div class="about-right">
+    <div class="ideal-card reveal">
+      <div class="ideal-icon icon-mint">🌿</div>
+      <div class="ideal-text">
+        <h4>Plant & Animal Friendly</h4>
+        <p>Living walls, potted gardens, and a space that genuinely welcomes your furry companions too.</p>
+      </div>
+    </div>
+    <div class="ideal-card reveal" style="transition-delay: 0.1s">
+      <div class="ideal-icon icon-blue">🤝</div>
+      <div class="ideal-text">
+        <h4>Everyone Allowed</h4>
+        <p>No dress codes, no judgement. Students, freelancers, retirees, families — all of you belong here.</p>
+      </div>
+    </div>
+    <div class="ideal-card reveal" style="transition-delay: 0.2s">
+      <div class="ideal-icon icon-mint-light">☁️</div>
+      <div class="ideal-text">
+        <h4>Rest or Work</h4>
+        <p>Deep focus zones, nap nooks, cozy reading corners. Your pace, your rules.</p>
+      </div>
+    </div>
+    <div class="ideal-card reveal" style="transition-delay: 0.3s">
+      <div class="ideal-icon icon-dark">✨</div>
+      <div class="ideal-text">
+        <h4>Have a Good Time</h4>
+        <p>Events, music, shared meals. Because a good workspace also makes you smile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="spaces" id="spaces">
+  <div class="spaces-header reveal">
+    <div>
+      <p class="section-label">Floor Plans</p>
+      <h2 class="spaces-title">Two floors,<br><em>infinite possibilities.</em></h2>
+    </div>
+    <p class="spaces-note">Add floor1.png and floor2.png to the same folder as this file.</p>
+  </div>
+  <div class="floors-grid">
+    <div class="floor-card reveal">
+      <div class="floor-img-wrap">
+        <img src="floor1.png" alt="Floor 1 plan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="floor-placeholder">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <rect x="8" y="8" width="48" height="48" rx="4" stroke="#D4C8D0" stroke-width="2"/>
+            <rect x="8" y="8" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="34" y="8" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="8" y="34" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="34" y="34" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+          </svg>
+          <span>Floor plan coming soon</span>
+        </div>
+      </div>
+      <div class="floor-info">
+        <p class="floor-num">First Floor</p>
+        <h3 class="floor-name">Ground Level</h3>
+        <p class="floor-desc">Open coworking, kitchen, lounge, pet-friendly terrace and main entrance.</p>
+      </div>
+    </div>
+    <div class="floor-card reveal" style="transition-delay: 0.15s">
+      <div class="floor-img-wrap">
+        <img src="floor2.png" alt="Floor 2 plan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="floor-placeholder">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <rect x="8" y="8" width="48" height="48" rx="4" stroke="#D4C8D0" stroke-width="2"/>
+            <rect x="8" y="8" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="34" y="8" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="8" y="34" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+            <rect x="34" y="34" width="22" height="22" stroke="#D4C8D0" stroke-width="1.5"/>
+          </svg>
+          <span>Floor plan coming soon</span>
+        </div>
+      </div>
+      <div class="floor-info">
+        <p class="floor-num">Second Floor</p>
+        <h3 class="floor-name">Upper Level</h3>
+        <p class="floor-desc">Private offices, quiet focus booths, reading garden, and rooftop access.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vibe-section" id="vibe">
+  <p class="section-label reveal">The Feeling</p>
+  <h2 class="about-title reveal" style="margin-top: 12px; font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.1;">
+    You can feel it<br>the moment you walk in.
+  </h2>
+  <div class="vibe-grid">
+    <div class="vibe-tile t1 reveal">
+      <span class="big-num">01</span>
+      <h3>Calm & Green</h3>
+      <p>Surrounded by living plants, natural light, and the quiet hum of people in their flow.</p>
+    </div>
+    <div class="vibe-tile t2 reveal" style="transition-delay: 0.1s">
+      <span class="big-num">02</span>
+      <h3>No Pressure</h3>
+      <p>Come to work. Come to rest. Come to just be. There is no wrong way to use this place.</p>
+    </div>
+    <div class="vibe-tile t3 reveal" style="transition-delay: 0.2s">
+      <span class="big-num">03</span>
+      <h3>Community Without Walls</h3>
+      <p>Open to every background, every pace, every kind of person. We built this for all of you — and we mean all of you.</p>
+    </div>
+    <div class="vibe-tile t4 reveal" style="transition-delay: 0.3s">
+      <span class="big-num">04</span>
+      <h3>Alive</h3>
+      <p>From the plants to the people, this place breathes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <p class="section-label">Come Say Hello</p>
+      <h2 class="contact-title">We are waiting<br>for <em>you.</em></h2>
+    </div>
+    <div class="contact-right reveal" style="transition-delay: 0.2s">
+      <input type="text" class="contact-input" placeholder="Your name">
+      <input type="email" class="contact-input" placeholder="Your email">
+      <textarea class="contact-input textarea" placeholder="What brings you here?"></textarea>
+      <button class="contact-btn">Send a message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-wrap">
+      <div class="footer-logo">
+        <img src="logo.png" alt="EcoWorking" onerror="this.style.display='none'">
+        <span>EcoWorking Space</span>
+      </div>
+      <p class="footer-slogan">Everyone Included</p>
+    </div>
+    <div class="footer-right">
+      <p>A coworking space built for everyone.<br>Plants, people, and good energy welcome.<br>© 2026 EcoWorking Space</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+
+  document.querySelectorAll('.floor-img-wrap img').forEach(img => {
+    img.addEventListener('load', () => {
+      const placeholder = img.nextElementSibling;
+      if (placeholder) placeholder.style.display = 'none';
+    });
+    img.addEventListener('error', () => {
+      img.style.display = 'none';
+      const placeholder = img.nextElementSibling;
+      if (placeholder) placeholder.style.display = 'flex';
+    });
+  });
+</script>
+
+</body>
+</html>
